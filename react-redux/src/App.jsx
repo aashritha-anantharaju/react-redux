@@ -2,24 +2,29 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import './App.css'
 import Header from "./components/Header"
 import DisplayCounter from "./components/DisplayCounter"
+import PrivacyMess from "./components/PrivacyMess"
+import Controls from "./components/Controls"
+import Container from "./components/Container"
+import { useSelector } from "react-redux"
 
 function App() {
-  //const [count, setCount] = useState(0)
+  const privacy = useSelector(store=>store.privacy);
 
   return (
-    <>
-      <div className="px-4 py-5 my-5 text-center">
-      <Header></Header>
-    <div className="col-lg-6 mx-auto">
-      <DisplayCounter></DisplayCounter>
-      <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" className="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
-        <button type="button" className="btn btn-outline-secondary btn-lg px-4">Secondary</button>
-      </div>
-    </div>
-  </div>
-    </>
-  )
+    <center>
+      <Container>
+        <div className="px-4 py-5 my-5 text-center">
+          <Header></Header>
+          <div className="col-lg-6 mx-auto">
+            {privacy?<PrivacyMess/>:<DisplayCounter/>}
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <Controls></Controls>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </center>
+  );
 }
 
 export default App
